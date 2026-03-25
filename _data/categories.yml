@@ -1,2 +1,6 @@
 介绍:
   slug: intro
+产品:
+  slug: product
+置顶:
+  slug: pinned
