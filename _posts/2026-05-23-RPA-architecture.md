@@ -4,6 +4,7 @@ date: 2026-05-23 12:00:00 +0800
 categories: [论文]
 tags: [architecture, privilege, virtualization, security, risc-v]
 description: 将特权配置从硬件固定转变为内存可配置，统一虚拟化、机密计算与沙箱场景
+image: /assets/img/rpa-cover.png
 license: false
 ---
 
