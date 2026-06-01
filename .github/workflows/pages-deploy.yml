@@ -94,17 +94,13 @@ jobs:
           name: site
           path: _site
 
-      - name: Deploy to ECS via rsync
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p $SSH_PORT $SSH_HOST >> ~/.ssh/known_hosts 2>/dev/null
-          rsync -avz --delete --exclude='fastile' --exclude='fastile/*' \
-            -e "ssh -p $SSH_PORT" \
-            _site/ $SSH_USER@$SSH_HOST:/var/www/blog/
+      - name: Deploy to ECS via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "_site/*"
+          target: "/var/www/blog"
+          overwrite: true
