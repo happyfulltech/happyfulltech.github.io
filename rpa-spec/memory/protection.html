@@ -1,0 +1,307 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Protection &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ISA Tag" href="../hetero/isatag.html" />
+    <link rel="prev" title="INHERIT Mode" href="inherit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Memory Protection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#protection-layers">Protection Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permission-propagation">Permission Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#write-xor-execute-w-x">Write-XOR-Execute (W^X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory-types">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#protection-example-secure-enclave">Protection Example: Secure Enclave</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Memory Protection</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/memory/protection.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memory-protection">
+<h1>Memory Protection<a class="headerlink" href="#memory-protection" title="Link to this heading"></a></h1>
+<p>RPA provides multi-layer memory protection through IPA boundaries,
+page permissions, and domain isolation.</p>
+<section id="protection-layers">
+<h2>Protection Layers<a class="headerlink" href="#protection-layers" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Layer 1: Page Table Permissions
+───────────────────────────────
+Per-page R/W/X attributes
+
+Layer 2: IPA Boundary Checks
+────────────────────────────
+Region-level access control
+
+Layer 3: Domain Isolation
+────────────────────────
+Complete address space separation
+</pre></div>
+</div>
+</section>
+<section id="permission-propagation">
+<h2>Permission Propagation<a class="headerlink" href="#permission-propagation" title="Link to this heading"></a></h2>
+<p>Child domains cannot exceed parent permissions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Permission intersection rule:
+
+child_effective_perm = child_page_perm ∩ parent_page_perm
+
+Example:
+┌──────────────────────────────────────────────────┐
+│ Parent page: RW-                                 │
+│ Child page: RWX                                  │
+│ Effective:   RW-  (execute denied)               │
+└──────────────────────────────────────────────────┘
+
+Hardware enforces this automatically:
+- Child page table may claim RWX
+- Parent page table limits to RW-
+- Actual access is intersection
+</pre></div>
+</div>
+</section>
+<section id="write-xor-execute-w-x">
+<h2>Write-XOR-Execute (W^X)<a class="headerlink" href="#write-xor-execute-w-x" title="Link to this heading"></a></h2>
+<p>RPA supports W^X enforcement:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>W^X rule: A page cannot be both writable and executable
+
+Implementation:
+if page.W and page.X:
+    fault(W_X_VIOLATION)
+
+This can be enforced at:
+- Page table level (hardware check)
+- IPA region level (region attributes)
+- Domain level (security policy)
+</pre></div>
+</div>
+</section>
+<section id="memory-types">
+<h2>Memory Types<a class="headerlink" href="#memory-types" title="Link to this heading"></a></h2>
+<p>RPA distinguishes memory types:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Memory Types</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Normal</p></td>
+<td><p>Cacheable, reorderable memory</p></td>
+</tr>
+<tr class="row-odd"><td><p>Device</p></td>
+<td><p>Non-cacheable, side-effect memory</p></td>
+</tr>
+<tr class="row-even"><td><p>Strongly-ordered</p></td>
+<td><p>Non-cacheable, non-reorderable</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Memory type in IPA region:
+region.attributes.device = 1  // Device memory
+
+Hardware behavior:
+- Device memory: No speculative reads
+- Device memory: No write combining
+- Device memory: Strict ordering
+</pre></div>
+</div>
+</section>
+<section id="protection-example-secure-enclave">
+<h2>Protection Example: Secure Enclave<a class="headerlink" href="#protection-example-secure-enclave" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Secure enclave memory layout:
+
+┌──────────────────────────────────────────────────┐
+│ Domain: Secure Enclave                           │
+│                                                  │
+│ IPA Region 0 (Code):                             │
+│   base  = 0x00000000                            │
+│   limit = 0x0000FFFF                            │
+│   attr  = R-X (read-only, executable)           │
+│                                                  │
+│ IPA Region 1 (Data):                             │
+│   base  = 0x00010000                            │
+│   limit = 0x0001FFFF                            │
+│   attr  = RW- (read-write, no execute)          │
+│                                                  │
+│ IPA Region 2 (Shared buffer):                    │
+│   base  = 0x00020000                            │
+│   limit = 0x0002FFFF                            │
+│   attr  = RW- (shared with parent)              │
+│                                                  │
+│ No other regions → Cannot access outside memory │
+└──────────────────────────────────────────────────┘
+
+Parent (OS) can:
+- Read/write shared buffer
+- Cannot read enclave private memory
+- If security groups enabled, OS cannot even access
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="inherit.html" class="btn btn-neutral float-left" title="INHERIT Mode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../hetero/isatag.html" class="btn btn-neutral float-right" title="ISA Tag" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

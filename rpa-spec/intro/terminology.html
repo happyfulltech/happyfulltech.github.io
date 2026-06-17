@@ -1,0 +1,272 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terminology &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Domain Creation Example" href="../examples/domain_creation.html" />
+    <link rel="prev" title="Key Features" href="features.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Key Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Terminology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#core-concepts">Core Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#address-concepts">Address Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modes">Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-concepts">Security Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#isa-concepts">ISA Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hierarchy-concepts">Hierarchy Concepts</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Terminology</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/intro/terminology.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="terminology">
+<h1>Terminology<a class="headerlink" href="#terminology" title="Link to this heading"></a></h1>
+<section id="core-concepts">
+<h2>Core Concepts<a class="headerlink" href="#core-concepts" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Domain</dt><dd><p>A privilege domain is the fundamental isolation unit in RPA.
+Each domain has its own address space and privilege level.
+Domains are organized in a tree hierarchy.</p>
+</dd>
+<dt>Domain Control Block (DCB)</dt><dd><p>Memory-resident data structure containing domain configuration.
+Stores page table base, IPA regions, exception vectors, and context.</p>
+</dd>
+<dt>descend</dt><dd><p>Primitive operation to enter a child domain.
+Saves current context, loads child configuration, switches execution.</p>
+</dd>
+<dt>ascend</dt><dd><p>Primitive operation to return to parent domain.
+Saves current context, switches to parent, jumps to trap handler.</p>
+</dd>
+<dt>return</dt><dd><p>Primitive operation to resume child domain after service.
+Restores child context from DCB.</p>
+</dd>
+</dl>
+</section>
+<section id="address-concepts">
+<h2>Address Concepts<a class="headerlink" href="#address-concepts" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Virtual Address (VA)</dt><dd><p>Address used by software in current domain.</p>
+</dd>
+<dt>Intermediate Physical Address (IPA)</dt><dd><p>Address after page table translation in child domain.
+Subject to IPA boundary checking before further translation.</p>
+</dd>
+<dt>Physical Address (PA)</dt><dd><p>Final address in root domain’s address space (actual DRAM).</p>
+</dd>
+<dt>IPA Regions</dt><dd><p>Boundary constraints defining accessible address space for a domain.
+Set by parent, enforced by hardware.</p>
+</dd>
+</dl>
+</section>
+<section id="modes">
+<h2>Modes<a class="headerlink" href="#modes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>INHERIT Mode</dt><dd><p>Child shares parent’s address space (pagetable = 0).
+No address translation, only context save/restore.</p>
+</dd>
+<dt>Independent Mode</dt><dd><p>Child has its own page table (pagetable ≠ 0).
+Full VA → IPA translation with boundary checking.</p>
+</dd>
+</dl>
+</section>
+<section id="security-concepts">
+<h2>Security Concepts<a class="headerlink" href="#security-concepts" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Security Group</dt><dd><p>Mechanism separating management rights from access rights.
+Binds domain to encryption keys and access policies.</p>
+</dd>
+<dt>Attestation</dt><dd><p>Report proving domain identity and integrity.
+Signed by hardware-derived keys.</p>
+</dd>
+<dt>Confidential Domain</dt><dd><p>Domain with memory encryption enabled.
+Parent cannot read child’s data despite configuring resources.</p>
+</dd>
+</dl>
+</section>
+<section id="isa-concepts">
+<h2>ISA Concepts<a class="headerlink" href="#isa-concepts" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>isa_tag</dt><dd><p>DCB field identifying domain’s instruction set.
+Enables heterogeneous-ISA support.</p>
+</dd>
+<dt>Context Conversion</dt><dd><p>Hardware process mapping registers between ISAs.
+Preserves calling convention semantics during cross-ISA transitions.</p>
+</dd>
+</dl>
+</section>
+<section id="hierarchy-concepts">
+<h2>Hierarchy Concepts<a class="headerlink" href="#hierarchy-concepts" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>Root Domain</dt><dd><p>Domain 0, the trust anchor.
+Highest privilege, owns all physical memory.</p>
+</dd>
+<dt>Child Domain</dt><dd><p>Domain created by parent via descend.
+Has restricted address space and lower privilege.</p>
+</dd>
+<dt>Relative Perspective</dt><dd><p>Each domain views itself as Domain 0.
+Children are Domain 1, 2, 3…
+Parent is Domain -1.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="features.html" class="btn btn-neutral float-left" title="Key Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../examples/domain_creation.html" class="btn btn-neutral float-right" title="Domain Creation Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pseudocode &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom Extensions" href="custom.html" />
+    <link rel="prev" title="DCB Field Encoding" href="encoding.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pseudocode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reference-implementation">Reference Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#descend-primitive">descend Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ascend-primitive">ascend Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#return-primitive">return Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ipa-boundary-check">IPA Boundary Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#security-group-check">Security Group Check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Pseudocode</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix/pseudocode.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pseudocode">
+<h1>Pseudocode<a class="headerlink" href="#pseudocode" title="Link to this heading"></a></h1>
+<p>This appendix provides pseudocode for RPA primitive implementations.</p>
+<section id="reference-implementation">
+<h2>Reference Implementation<a class="headerlink" href="#reference-implementation" title="Link to this heading"></a></h2>
+<p>A Python executable specification (pysim) validates the RPA design <a class="reference internal" href="references.html#pysim" id="id1"><span>[PYSIM]</span></a>.
+The pseudocode examples in this chapter are derived from the pysim implementation.</p>
+<p id="pysim"><strong>Repository</strong>: <a class="reference external" href="https://github.com/arthurdev000/rpa-pysim">https://github.com/arthurdev000/rpa-pysim</a></p>
+<p><strong>Version</strong>: 0.7.0</p>
+<p><strong>Test Coverage</strong>: 107 test cases</p>
+</section>
+<section id="descend-primitive">
+<h2>descend Primitive<a class="headerlink" href="#descend-primitive" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>procedure descend(dcb_address: physical_address)
+
+// Step 1: DCB Validation
+size = memory[dcb_address + 0x00]
+if dcb_address % 32 != 0:
+    fault(DCB_ALIGNMENT_ERROR)
+
+if size &lt; 8:
+    fault(DCB_SIZE_ERROR)
+
+// Step 2: Domain ID Assignment
+domain_id = next_domain_id
+next_domain_id = next_domain_id + 1
+memory[dcb_address + 0x04] = domain_id
+
+// Step 3: Save Parent Context
+current_dcb.saved_pc = PC + 4
+current_dcb.saved_sp = SP
+current_dcb.saved_psr = PSR
+
+// Step 4: Link Child
+current_dcb.child_block = dcb_address
+memory[dcb_address + 0x08] = current_dcb_physical_address
+
+// Step 5: Domain Switch
+current_domain = domain_id
+current_dcb_physical_address = dcb_address
+
+// Step 6: Load Child Entry
+entry_point = memory[dcb_address + saved_lr_offset]
+PC = entry_point
+
+end procedure
+</pre></div>
+</div>
+</section>
+<section id="ascend-primitive">
+<h2>ascend Primitive<a class="headerlink" href="#ascend-primitive" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>procedure ascend(service_type: integer)
+
+// Step 1: Context Save
+current_dcb.saved_pc = PC + 4
+current_dcb.saved_sp = SP
+current_dcb.saved_psr = PSR
+
+// Step 2: Get Parent DCB
+parent_dcb_address = current_dcb.parent_block
+if parent_dcb_address == 0:
+    fault(UNHANDLED_TRAP)
+    return
+
+// Step 3: Trap Vector Resolution with Propagation
+trap_handler = 0
+while trap_handler == 0:
+    trap_handler = memory[parent_dcb_address + trap_vector_offset]
+
+    if trap_handler != 0:
+        break
+
+    parent_dcb_address = memory[parent_dcb_address + parent_block_offset]
+    if parent_dcb_address == 0:
+        fault(UNHANDLED_TRAP)
+        return
+
+// Step 4: Domain Switch
+current_dcb_physical_address = parent_dcb_address
+current_domain = memory[parent_dcb_address + domain_id_offset]
+
+// Step 5: Jump to Handler
+PC = trap_handler
+
+// Pass service type in argument register
+R0 = service_type
+
+end procedure
+</pre></div>
+</div>
+</section>
+<section id="return-primitive">
+<h2>return Primitive<a class="headerlink" href="#return-primitive" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>procedure return()
+
+// Step 1: Locate Child DCB
+child_dcb_address = current_dcb.child_block
+if child_dcb_address == 0:
+    fault(NO_CHILD_DOMAIN)
+    return
+
+// Step 2: Domain Switch
+current_dcb_physical_address = child_dcb_address
+current_domain = memory[child_dcb_address + domain_id_offset]
+
+// Step 3: Context Restore
+PC = memory[child_dcb_address + saved_pc_offset]
+SP = memory[child_dcb_address + saved_sp_offset]
+PSR = memory[child_dcb_address + saved_psr_offset]
+
+// Return value in R0
+// (Handler sets R0 before return)
+
+// Step 4: Clear Child Link
+current_dcb.child_block = 0
+
+end procedure
+</pre></div>
+</div>
+</section>
+<section id="ipa-boundary-check">
+<h2>IPA Boundary Check<a class="headerlink" href="#ipa-boundary-check" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>function check_ipa_access(ipa: address, access_type: access_type)
+                          returns boolean
+
+region_count = current_dcb.ipa_region_count
+
+for i = 0 to region_count - 1:
+    region_base = current_dcb.ipa_regions[i].base
+    region_limit = current_dcb.ipa_regions[i].limit
+    region_attr = current_dcb.ipa_regions[i].attributes
+
+    if ipa &gt;= region_base and ipa &lt;= region_limit:
+        // Found matching region, check permissions
+        if access_type == READ and region_attr.R == 0:
+            return PERMISSION_DENIED
+        if access_type == WRITE and region_attr.W == 0:
+            return PERMISSION_DENIED
+        if access_type == EXECUTE and region_attr.X == 0:
+            return PERMISSION_DENIED
+
+        return ALLOWED
+
+// IPA not in any permitted region
+return IPA_BOUNDARY_VIOLATION
+
+end function
+</pre></div>
+</div>
+</section>
+<section id="security-group-check">
+<h2>Security Group Check<a class="headerlink" href="#security-group-check" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>function check_security_group_access(source_domain: domain_id,
+                                     target_address: address)
+                                     returns boolean
+
+source_group = domain_table[source_domain].security_group
+target_group = get_memory_owner_group(target_address)
+
+// Check access matrix
+if access_matrix[source_group][target_group] == DENY:
+    return SECURITY_GROUP_VIOLATION
+
+return ALLOWED
+
+end function
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="encoding.html" class="btn btn-neutral float-left" title="DCB Field Encoding" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom.html" class="btn btn-neutral float-right" title="Custom Extensions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

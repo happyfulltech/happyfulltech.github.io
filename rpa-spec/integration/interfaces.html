@@ -1,0 +1,342 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware-Software Interface &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Boot Sequence" href="boot.html" />
+    <link rel="prev" title="System Diagram" href="diagram.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="diagram.html">System Diagram</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hardware-Software Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dcb-memory-layout">DCB Memory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#instruction-encoding">Instruction Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#control-registers">Control Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#software-conventions">Software Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-codes">Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Hardware-Software Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/integration/interfaces.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hardware-software-interface">
+<h1>Hardware-Software Interface<a class="headerlink" href="#hardware-software-interface" title="Link to this heading"></a></h1>
+<p>This chapter describes the interface between RPA hardware and software.</p>
+<section id="dcb-memory-layout">
+<h2>DCB Memory Layout<a class="headerlink" href="#dcb-memory-layout" title="Link to this heading"></a></h2>
+<p>The Domain Control Block is the primary hardware-software interface:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DCB Memory Layout:
+┌───────────┬────────────────────────────────────────┐
+│ Offset    │ Field                                  │
+├───────────┼────────────────────────────────────────┤
+│ 0x00      │ ctrlblock_size (32-bit)                │
+│ 0x04      │ domain_id (32-bit)                     │
+│ 0x08      │ parent_block (64-bit)                  │
+│ 0x10      │ child_block (64-bit)                   │
+│ 0x18      │ trap_vector (64-bit)                   │
+│ 0x20      │ interrupt_vector (64-bit)              │
+│ 0x28      │ page_table_root (64-bit)               │
+│ 0x30      │ translation_mode (32-bit)              │
+│ 0x34      │ isa_tag (16-bit)                       │
+│ 0x36      │ security_group (8-bit)                 │
+│ 0x37      │ encryption_mode (8-bit)                │
+│ 0x38      │ saved_pc (64-bit)                      │
+│ 0x40      │ saved_sp (64-bit)                      │
+│ 0x48      │ saved_psr (64-bit)                     │
+│ 0x50+     │ ISA-specific registers                 │
+│ ...       │ ...                                    │
+│ variable  │ ipa_regions[]                          │
+└───────────┴────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="instruction-encoding">
+<h2>Instruction Encoding<a class="headerlink" href="#instruction-encoding" title="Link to this heading"></a></h2>
+<p>RPA primitives use standard instruction encoding:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>descend encoding:
+┌──────────────────────────────────────────────────┐
+│ [31:26] opcode = 0x3F (CUSTOM)                   │
+│ [25:20] func = 0x00 (DESCEND)                    │
+│ [19:15] rs1 = DCB address register               │
+│ [14:0]  unused                                  │
+└──────────────────────────────────────────────────┘
+
+ascend encoding:
+┌──────────────────────────────────────────────────┐
+│ [31:26] opcode = 0x3F (CUSTOM)                   │
+│ [25:20] func = 0x01 (ASCEND)                     │
+│ [19:15] rs1 = service type register              │
+│ [14:0]  unused                                  │
+└──────────────────────────────────────────────────┘
+
+return encoding:
+┌──────────────────────────────────────────────────┐
+│ [31:26] opcode = 0x3F (CUSTOM)                   │
+│ [25:20] func = 0x02 (RETURN)                     │
+│ [19:0]  unused                                  │
+└──────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="control-registers">
+<h2>Control Registers<a class="headerlink" href="#control-registers" title="Link to this heading"></a></h2>
+<p>RPA defines system control registers:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Control Registers:
+┌──────────────────────────────────────────────────┐
+│ Address   │ Name          │ Description          │
+├──────────────────────────────────────────────────┤
+│ 0x800     │ CURRENT_DCB   │ Current domain&#39;s DCB │
+│ 0x804     │ DOMAIN_ID     │ Current domain ID    │
+│ 0x808     │ PARENT_DCB    │ Parent&#39;s DCB         │
+│ 0x80C     │ CHILD_DCB     │ Child&#39;s DCB          │
+│ 0x810     │ TRAP_STATUS   │ Trap status register │
+│ 0x814     │ FAULT_CODE    │ Fault code register  │
+└──────────────────────────────────────────────────┘
+
+Access:
+- Read-only: DOMAIN_ID, CURRENT_DCB
+- Read-write: TRAP_STATUS (by handler)
+- Write-only: FAULT_CODE (hardware writes)
+</pre></div>
+</div>
+</section>
+<section id="software-conventions">
+<h2>Software Conventions<a class="headerlink" href="#software-conventions" title="Link to this heading"></a></h2>
+<p>Software should follow these conventions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DCB Allocation:
+- DCB must be 32-byte aligned
+- DCB size must be multiple of 32 bytes
+- DCB should be in memory accessible to parent
+
+Register Usage:
+- R0 (or X0/a0): Argument/return value
+- R1 (or X1/a1): Second argument
+- PC: Saved on domain transition
+- SP: Saved on domain transition
+
+Trap Handler Convention:
+┌──────────────────────────────────────────────────┐
+│ Entry:                                           │
+│   R0 = trap_type                                 │
+│   R1 = faulting_address                          │
+│   SP = handler stack (configured)                │
+│                                                  │
+│ Exit:                                            │
+│   return instruction                             │
+│   R0 = return value                              │
+└──────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="error-codes">
+<h2>Error Codes<a class="headerlink" href="#error-codes" title="Link to this heading"></a></h2>
+<p>Hardware reports errors via fault codes:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Fault Codes</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Code</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x00</p></td>
+<td><p>No error</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x01</p></td>
+<td><p>DCB alignment error</p></td>
+</tr>
+<tr class="row-even"><td><p>0x02</p></td>
+<td><p>DCB size error</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x03</p></td>
+<td><p>No child domain</p></td>
+</tr>
+<tr class="row-even"><td><p>0x04</p></td>
+<td><p>Child not suspended</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x10</p></td>
+<td><p>IPA boundary violation</p></td>
+</tr>
+<tr class="row-even"><td><p>0x11</p></td>
+<td><p>Permission denied</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x12</p></td>
+<td><p>Security group violation</p></td>
+</tr>
+<tr class="row-even"><td><p>0x20</p></td>
+<td><p>Unhandled trap</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x21</p></td>
+<td><p>Unhandled interrupt</p></td>
+</tr>
+<tr class="row-even"><td><p>0x30</p></td>
+<td><p>Unsupported ISA</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="diagram.html" class="btn btn-neutral float-left" title="System Diagram" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="boot.html" class="btn btn-neutral float-right" title="Boot Sequence" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

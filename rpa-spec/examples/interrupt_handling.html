@@ -1,0 +1,445 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interrupt Handling Examples &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DCB Memory Layout" href="../dcb/layout.html" />
+    <link rel="prev" title="System Call Example" href="system_call.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_call.html">System Call Example</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Interrupt Handling Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#interrupt-delivery-overview">Interrupt Delivery Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-1-locally-handled-interrupt">Example 1: Locally Handled Interrupt</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupt-configuration">Interrupt Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interrupt-arrival">Interrupt Arrival</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-actions">Hardware Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#guest-os-handler">Guest OS Handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#timeline">Timeline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-2-propagated-interrupt">Example 2: Propagated Interrupt</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Interrupt Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Interrupt Arrival</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Hardware Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hypervisor-handler">Hypervisor Handler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Timeline</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#comparison">Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interrupt-controller-configuration">Interrupt Controller Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#per-domain-configuration">Per-Domain Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Interrupt Handling Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/interrupt_handling.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interrupt-handling-examples">
+<h1>Interrupt Handling Examples<a class="headerlink" href="#interrupt-handling-examples" title="Link to this heading"></a></h1>
+<p>This chapter demonstrates two interrupt scenarios: one handled locally, one propagated to parent.</p>
+<section id="interrupt-delivery-overview">
+<h2>Interrupt Delivery Overview<a class="headerlink" href="#interrupt-delivery-overview" title="Link to this heading"></a></h2>
+<p>When an interrupt occurs:</p>
+<ol class="arabic simple">
+<li><p>Hardware identifies target domain</p></li>
+<li><p>If domain has interrupt handler, deliver</p></li>
+<li><p>If not, propagate to parent domain</p></li>
+<li><p>Repeat until handled</p></li>
+</ol>
+</section>
+<section id="example-1-locally-handled-interrupt">
+<h2>Example 1: Locally Handled Interrupt<a class="headerlink" href="#example-1-locally-handled-interrupt" title="Link to this heading"></a></h2>
+<p>Scenario: Timer interrupt for Guest OS scheduler.</p>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Domain 2: Guest OS
+- Has timer configured
+- Has interrupt handler registered
+
+Domain 3: User Application (running)
+- No timer access
+- Will be preempted
+</pre></div>
+</div>
+</section>
+<section id="interrupt-configuration">
+<h3>Interrupt Configuration<a class="headerlink" href="#interrupt-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Guest OS registered timer interrupt
+irq_timer = irq_request(IRQ_TYPE_TIMER)
+dcb2.interrupt_ctrl = irq_controller
+
+// Registered handler address
+timer_handler = 0x8000_1000
+</pre></div>
+</div>
+</section>
+<section id="interrupt-arrival">
+<h3>Interrupt Arrival<a class="headerlink" href="#interrupt-arrival" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Hardware timer fires
+// Interrupt controller signals Domain 2
+</pre></div>
+</div>
+</section>
+<section id="hardware-actions">
+<h3>Hardware Actions<a class="headerlink" href="#hardware-actions" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Domain 3 is running, Domain 2 owns the interrupt
+
+1. Save Domain 3 context (if different owner)
+   dcb3.saved_pc = PC
+   dcb3.saved_sp = SP
+   dcb3.saved_psr = PSR
+
+2. Switch to Domain 2
+   current_domain = domain_2
+
+3. Check if Domain 2 handles this interrupt
+   irq_owner = interrupt_get_owner(irq_timer)
+   if irq_owner == domain_2:
+       // Deliver locally
+
+4. Jump to interrupt handler
+   PC = dcb2.interrupt_handler
+</pre></div>
+</div>
+</section>
+<section id="guest-os-handler">
+<h3>Guest OS Handler<a class="headerlink" href="#guest-os-handler" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>timer_handler:
+    // Save current context
+    push {r0-r12, lr}
+
+    // Handle timer: scheduler tick
+    bl scheduler_tick
+
+    // Restore and return to Domain 3
+    pop {r0-r12, lr}
+    return
+</pre></div>
+</div>
+</section>
+<section id="timeline">
+<h3>Timeline<a class="headerlink" href="#timeline" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Time │ Domain │ Action
+─────┼────────┼──────────────────────────────────
+ T0  │   3    │ Application running
+ T1  │   HW   │ Timer interrupt arrives
+ T2  │   HW   │ Save Domain 3 context
+ T3  │   HW   │ Switch to Domain 2
+ T4  │   HW   │ Jump to timer_handler
+ T5  │   2    │ Guest OS scheduler runs
+ T6  │   2    │ Execute return
+ T7  │   HW   │ Restore Domain 3 context
+ T8  │   3    │ Application resumes
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-2-propagated-interrupt">
+<h2>Example 2: Propagated Interrupt<a class="headerlink" href="#example-2-propagated-interrupt" title="Link to this heading"></a></h2>
+<p>Scenario: Network interrupt while User Application running.</p>
+<section id="id1">
+<h3>Setup<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Domain 2: Guest OS
+- Has network driver
+- trap_vector = 0 (propagate unhandled traps)
+
+Domain 3: User Application
+- No interrupt handlers
+- Running computation
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>Interrupt Configuration<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Network interrupt owned by Hypervisor (Domain 1)
+// Guest OS does not own network hardware
+
+dcb2.interrupt_ctrl = virtual_irq_only
+dcb2.trap_vector = 0    // Propagate unhandled
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h3>Interrupt Arrival<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Network interrupt arrives
+// Target: Domain 1 (Hypervisor)
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>Hardware Actions<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>// Domain 3 running, interrupt for Domain 1
+
+1. Implicit ascend from Domain 3
+   // Domain 3 has no handler, trap to Domain 2
+   dcb3.saved_pc = PC
+   current_domain = domain_2
+
+2. Check Domain 2 trap_vector
+   if dcb2.trap_vector == 0:
+       // Propagate to Domain 1
+
+3. Implicit ascend to Domain 1
+   dcb2.saved_pc = PC
+   current_domain = domain_1
+
+4. Check Domain 1 interrupt ownership
+   if interrupt_owner == domain_1:
+       PC = dcb1.network_handler
+</pre></div>
+</div>
+</section>
+<section id="hypervisor-handler">
+<h3>Hypervisor Handler<a class="headerlink" href="#hypervisor-handler" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>network_handler:
+    // Read network packet
+    // Determine target guest
+    // Inject virtual interrupt to Domain 2
+    virq_inject(domain_2, VIRQ_NETWORK)
+
+    // Return down the chain
+    return    // To Domain 2
+    return    // To Domain 3
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>Timeline<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Time │ Domain │ Action
+─────┼────────┼──────────────────────────────────
+ T0  │   3    │ Application running
+ T1  │   HW   │ Network interrupt (for Domain 1)
+ T2  │   HW   │ Implicit ascend: 3 → 2
+ T3  │   HW   │ trap_vector = 0, propagate
+ T4  │   HW   │ Implicit ascend: 2 → 1
+ T5  │   HW   │ Jump to network_handler
+ T6  │   1    │ Hypervisor handles packet
+ T7  │   1    │ return (to Domain 2)
+ T8  │   HW   │ Restore Domain 2 context
+ T9  │   2    │ return (to Domain 3)
+ T10 │   HW   │ Restore Domain 3 context
+ T11 │   3    │ Application resumes
+</pre></div>
+</div>
+</section>
+</section>
+<section id="comparison">
+<h2>Comparison<a class="headerlink" href="#comparison" title="Link to this heading"></a></h2>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">Interrupt Handling Comparison</span><a class="headerlink" href="#id6" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Local Handling</p></th>
+<th class="head"><p>Propagated Handling</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Handler location</p></td>
+<td><p>Same domain as interrupt owner</p></td>
+<td><p>Ancestor domain</p></td>
+</tr>
+<tr class="row-odd"><td><p>Context switches</p></td>
+<td><p>1 (current → handler)</p></td>
+<td><p>N (propagate through N levels)</p></td>
+</tr>
+<tr class="row-even"><td><p>Latency</p></td>
+<td><p>Lower</p></td>
+<td><p>Higher (proportional to levels)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Use case</p></td>
+<td><p>Guest OS timer, device</p></td>
+<td><p>Shared hardware, security</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="interrupt-controller-configuration">
+<h2>Interrupt Controller Configuration<a class="headerlink" href="#interrupt-controller-configuration" title="Link to this heading"></a></h2>
+<section id="per-domain-configuration">
+<h3>Per-Domain Configuration<a class="headerlink" href="#per-domain-configuration" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>struct interrupt_config {
+    irq_mask;           // Which IRQs this domain handles
+    irq_handler;        // Handler address
+    propagate_mask;     // IRQs to always propagate
+}
+
+// Domain 2 (Guest OS)
+interrupt_config.irq_mask = {TIMER, UART}
+interrupt_config.propagate_mask = {NETWORK, DISK}
+
+// Domain 1 (Hypervisor)
+interrupt_config.irq_mask = {ALL}
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="system_call.html" class="btn btn-neutral float-left" title="System Call Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dcb/layout.html" class="btn btn-neutral float-right" title="DCB Memory Layout" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Extensions &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="references.html" />
+    <link rel="prev" title="Pseudocode" href="pseudocode.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Custom Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#extension-points">Extension Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-dcb-fields">Custom DCB Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-isa-tags">Custom ISA Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-trap-types">Custom Trap Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-memory-attributes">Custom Memory Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extension-discovery">Extension Discovery</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Custom Extensions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix/custom.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="custom-extensions">
+<h1>Custom Extensions<a class="headerlink" href="#custom-extensions" title="Link to this heading"></a></h1>
+<p>RPA is designed to be extensible. This appendix describes how to add
+custom extensions.</p>
+<section id="extension-points">
+<h2>Extension Points<a class="headerlink" href="#extension-points" title="Link to this heading"></a></h2>
+<p>RPA provides several extension points:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Extension Points</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 70.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Extension Point</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DCB fields</p></td>
+<td><p>Add implementation-defined fields</p></td>
+</tr>
+<tr class="row-odd"><td><p>ISA tags</p></td>
+<td><p>Support custom ISAs</p></td>
+</tr>
+<tr class="row-even"><td><p>Trap types</p></td>
+<td><p>Define custom trap reasons</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory attributes</p></td>
+<td><p>Custom memory types</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="custom-dcb-fields">
+<h2>Custom DCB Fields<a class="headerlink" href="#custom-dcb-fields" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Standard DCB fields end at offset defined by ctrlblock_size.
+Implementation-defined fields follow:
+
+┌──────────────────────────────────────────────────┐
+│ Standard DCB fields (0x00 - 0x6F)                │
+├──────────────────────────────────────────────────┤
+│ IPA regions (variable)                           │
+├──────────────────────────────────────────────────┤
+│ Implementation-defined fields                    │
+│   0xN+00: custom_field_0                         │
+│   0xN+08: custom_field_1                         │
+│   ...                                            │
+└──────────────────────────────────────────────────┘
+
+Guidelines:
+- ctrlblock_size must include custom fields
+- Custom fields must be documented
+- Software must check ctrlblock_size before accessing
+</pre></div>
+</div>
+</section>
+<section id="custom-isa-tags">
+<h2>Custom ISA Tags<a class="headerlink" href="#custom-isa-tags" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ISA tag allocation:
+┌──────────────────────────────────────────────────┐
+│ 0x0000 - 0x00FF : Standard ISAs (RISC-V, ARM, x86)│
+│ 0x0100 - 0xFEFF : Reserved for future standard    │
+│ 0xFF00 - 0xFFFF : Implementation-defined          │
+└──────────────────────────────────────────────────┘
+
+Custom ISA implementation:
+1. Define ISA tag value (0xFF00+)
+2. Implement instruction decoder
+3. Define context save/restore format
+4. Document in implementation manual
+</pre></div>
+</div>
+</section>
+<section id="custom-trap-types">
+<h2>Custom Trap Types<a class="headerlink" href="#custom-trap-types" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Trap type allocation:
+┌──────────────────────────────────────────────────┐
+│ 0x00 - 0x7F : Standard traps                     │
+│ 0x80 - 0xFF : Implementation-defined             │
+└──────────────────────────────────────────────────┘
+
+Standard trap types:
+┌──────────────────────────────────────────────────┐
+│ 0x00 : System call                               │
+│ 0x01 : Page fault                                │
+│ 0x02 : Privilege violation                       │
+│ 0x03 : IPA boundary violation                    │
+│ 0x04 : Alignment fault                           │
+│ 0x05 : Security group violation                  │
+└──────────────────────────────────────────────────┘
+
+Custom trap handling:
+1. Hardware detects custom condition
+2. Hardware sets trap_type = 0x80+
+3. Standard trap propagation applies
+4. Handler interprets custom trap_type
+</pre></div>
+</div>
+</section>
+<section id="custom-memory-attributes">
+<h2>Custom Memory Attributes<a class="headerlink" href="#custom-memory-attributes" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Memory attribute extension:
+┌──────────────────────────────────────────────────┐
+│ Standard attributes (bits 0-7)                    │
+│   R, W, X, D, C, B                               │
+├──────────────────────────────────────────────────┤
+│ Extension attributes (bits 8-15)                  │
+│   Implementation-defined                          │
+└──────────────────────────────────────────────────┘
+
+Example custom attributes:
+┌──────────────────────────────────────────────────┐
+│ Bit 8  : Scratchpad memory                       │
+│ Bit 9  : Tightly-coupled memory                  │
+│ Bit 10 : Non-coherent                            │
+└──────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="extension-discovery">
+<h2>Extension Discovery<a class="headerlink" href="#extension-discovery" title="Link to this heading"></a></h2>
+<p>Software can discover available extensions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Extension Discovery Register:
+┌──────────────────────────────────────────────────┐
+│ Address: 0xF00                                   │
+│ Bits 0-7  : Supported standard features          │
+│ Bits 8-15 : Supported custom extensions          │
+│ Bits 16-23: Extension version                    │
+│ Bits 24-31: Implementation ID                    │
+└──────────────────────────────────────────────────┘
+
+Software should:
+1. Read extension discovery register
+2. Check required features are present
+3. Adapt behavior based on available extensions
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pseudocode.html" class="btn btn-neutral float-left" title="Pseudocode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="references.html" class="btn btn-neutral float-right" title="References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

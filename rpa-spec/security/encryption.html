@@ -1,0 +1,338 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Encryption &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Attestation" href="attestation.html" />
+    <link rel="prev" title="Security Groups" href="group.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="group.html">Security Groups</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Memory Encryption</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#encryption-overview">Encryption Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#per-domain-encryption">Per-Domain Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#encryption-modes">Encryption Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#memory-bandwidth-impact">Memory Bandwidth Impact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-management">Key Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#use-case-confidential-computing">Use Case: Confidential Computing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Memory Encryption</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/security/encryption.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="memory-encryption">
+<h1>Memory Encryption<a class="headerlink" href="#memory-encryption" title="Link to this heading"></a></h1>
+<p>RPA supports hardware memory encryption to protect against physical
+memory attacks.</p>
+<section id="encryption-overview">
+<h2>Encryption Overview<a class="headerlink" href="#encryption-overview" title="Link to this heading"></a></h2>
+<p>Memory encryption protects data at rest:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Memory Encryption Flow:
+┌──────────────────────────────────────────────────┐
+│ CPU                                               │
+│   │                                               │
+│   │ Plain text                                    │
+│   ▼                                               │
+│ ┌─────────────────────────────────────────────┐  │
+│ │ Encryption Engine                            │  │
+│ │   key = domain_encryption_key               │  │
+│ │   cipher = AES-XTS(plaintext, key)          │  │
+│ └─────────────────────────────────────────────┘  │
+│   │                                               │
+│   │ Cipher text                                   │
+│   ▼                                               │
+│ ┌─────────────────────────────────────────────┐  │
+│ │ Memory Controller                            │  │
+│ └─────────────────────────────────────────────┘  │
+│   │                                               │
+│   ▼                                               │
+│ DRAM (encrypted)                                 │
+└──────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="per-domain-encryption">
+<h2>Per-Domain Encryption<a class="headerlink" href="#per-domain-encryption" title="Link to this heading"></a></h2>
+<p>Each domain can have its own encryption key:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DCB Field: encryption_key_id
+────────────────────────────
+Reference to encryption key
+
+Key Management:
+┌──────────────────────────────────────────────────┐
+│ Key 0: Root domain key                           │
+│ Key 1: OS domain key                             │
+│ Key 2: Application domain key                    │
+│ Key 3: Secure enclave key                        │
+└──────────────────────────────────────────────────┘
+
+Hardware automatically:
+1. Selects key based on accessing domain
+2. Encrypts on write
+3. Decrypts on read
+</pre></div>
+</div>
+</section>
+<section id="encryption-modes">
+<h2>Encryption Modes<a class="headerlink" href="#encryption-modes" title="Link to this heading"></a></h2>
+<p>RPA supports multiple encryption modes:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Encryption Modes</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>None</p></td>
+<td><p>No encryption</p></td>
+</tr>
+<tr class="row-odd"><td><p>Integrity-only</p></td>
+<td><p>MAC but no encryption</p></td>
+</tr>
+<tr class="row-even"><td><p>Confidentiality</p></td>
+<td><p>Encryption without integrity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Confidentiality+Integrity</p></td>
+<td><p>Full encryption with MAC</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DCB Field: encryption_mode
+──────────────────────────
+0 = None
+1 = Integrity only
+2 = Confidentiality
+3 = Confidentiality + Integrity
+</pre></div>
+</div>
+</section>
+<section id="memory-bandwidth-impact">
+<h2>Memory Bandwidth Impact<a class="headerlink" href="#memory-bandwidth-impact" title="Link to this heading"></a></h2>
+<p>Encryption adds latency to memory access:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Latency components:
+┌──────────────────────────────────────────────────┐
+│ Base DRAM latency:    ~100 cycles               │
+│ Encryption overhead:  +~10-20 cycles            │
+│ Integrity check:      +~5-10 cycles             │
+│ Total:                ~115-130 cycles           │
+└──────────────────────────────────────────────────┘
+
+Mitigations:
+- Cache encryption keys in on-chip storage
+- Use wide-bus encryption engines
+- Cache line granularity encryption
+</pre></div>
+</div>
+</section>
+<section id="key-management">
+<h2>Key Management<a class="headerlink" href="#key-management" title="Link to this heading"></a></h2>
+<p>Encryption keys are managed securely:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Key Lifecycle:
+
+1. Generation
+   ─────────────
+   Keys generated by hardware RNG
+   Never exposed to software
+
+2. Distribution
+   ─────────────
+   Keys stored in secure key storage
+   Referenced by key_id in DCB
+
+3. Rotation
+   ──────────
+   Parent can rotate child&#39;s key
+   Requires domain re-encryption
+
+4. Destruction
+   ────────────
+   Key destroyed on domain termination
+   Memory becomes unreadable
+</pre></div>
+</div>
+</section>
+<section id="use-case-confidential-computing">
+<h2>Use Case: Confidential Computing<a class="headerlink" href="#use-case-confidential-computing" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Confidential VM protected from cloud hypervisor:
+
+Domain 0: Cloud Hypervisor (Group 0, Key 0)
+  └─ Domain 1: Confidential VM (Group 3, Key 1)
+
+Cloud hypervisor:
+- Can manage VM (create, terminate)
+- Cannot read VM memory (different security group)
+- Cannot decrypt VM memory (different key)
+
+VM owner can verify:
+- VM is isolated from hypervisor
+- Memory is encrypted
+- Via remote attestation
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="group.html" class="btn btn-neutral float-left" title="Security Groups" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="attestation.html" class="btn btn-neutral float-right" title="Attestation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,323 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Context Management &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Privilege Model" href="privilege.html" />
+    <link rel="prev" title="ISA Tag" href="isatag.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="isatag.html">ISA Tag</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Context Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#context-structure">Context Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#context-save-on-domain-transition">Context Save on Domain Transition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#context-restore">Context Restore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-isa-calling-convention">Cross-ISA Calling Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#context-size">Context Size</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Context Management</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/hetero/context.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="context-management">
+<h1>Context Management<a class="headerlink" href="#context-management" title="Link to this heading"></a></h1>
+<p>Context management in heterogeneous-ISA systems handles ISA-specific
+register formats.</p>
+<section id="context-structure">
+<h2>Context Structure<a class="headerlink" href="#context-structure" title="Link to this heading"></a></h2>
+<p>Each ISA has a different context format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RISC-V Context:
+┌──────────────────────────────────────────────────┐
+│ PC (64-bit)                                      │
+│ x1-x31 (31 × 64-bit)                            │
+│ F0-F31 (32 × 64-bit, if FP enabled)             │
+│ CSR subset (sstatus, etc.)                      │
+└──────────────────────────────────────────────────┘
+
+ARM64 Context:
+┌──────────────────────────────────────────────────┐
+│ PC (64-bit)                                      │
+│ SP (64-bit)                                      │
+│ X0-X30 (31 × 64-bit)                            │
+│ V0-V31 (32 × 128-bit, SIMD/FP)                  │
+│ PSTATE subset                                    │
+└──────────────────────────────────────────────────┘
+
+x86-64 Context:
+┌──────────────────────────────────────────────────┐
+│ RIP (64-bit)                                     │
+│ RSP (64-bit)                                     │
+│ RFLAGS (64-bit)                                  │
+│ RAX-R15 (16 × 64-bit)                           │
+│ XMM0-XMM15 (16 × 128-bit, SSE)                  │
+└──────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="context-save-on-domain-transition">
+<h2>Context Save on Domain Transition<a class="headerlink" href="#context-save-on-domain-transition" title="Link to this heading"></a></h2>
+<p>Hardware saves context in ISA-specific format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On ascend/descend:
+
+Step 1: Determine current ISA
+─────────────────────────────
+current_isa = current_dcb.isa_tag
+
+Step 2: Save in ISA-specific format
+───────────────────────────────────
+switch current_isa:
+    case RISCV:
+        save_riscv_context(current_dcb)
+    case ARM64:
+        save_arm64_context(current_dcb)
+    case X86_64:
+        save_x86_64_context(current_dcb)
+</pre></div>
+</div>
+</section>
+<section id="context-restore">
+<h2>Context Restore<a class="headerlink" href="#context-restore" title="Link to this heading"></a></h2>
+<p>Context restore uses target ISA format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On return:
+
+Step 1: Determine target ISA
+────────────────────────────
+target_isa = child_dcb.isa_tag
+
+Step 2: Restore in ISA-specific format
+──────────────────────────────────────
+switch target_isa:
+    case RISCV:
+        restore_riscv_context(child_dcb)
+    case ARM64:
+        restore_arm64_context(child_dcb)
+    case X86_64:
+        restore_x86_64_context(child_dcb)
+</pre></div>
+</div>
+</section>
+<section id="cross-isa-calling-convention">
+<h2>Cross-ISA Calling Convention<a class="headerlink" href="#cross-isa-calling-convention" title="Link to this heading"></a></h2>
+<p>Cross-ISA calls require argument mapping:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RISC-V → ARM64 argument mapping:
+
+┌──────────────────────────────────────────────────┐
+│ RISC-V  │ ARM64  │ Purpose                       │
+├──────────────────────────────────────────────────┤
+│ a0 (x10)│ X0     │ Argument 0 / Return value     │
+│ a1 (x11)│ X1     │ Argument 1                    │
+│ a2 (x12)│ X2     │ Argument 2                    │
+│ a3 (x13)│ X3     │ Argument 3                    │
+│ a4 (x14)│ X4     │ Argument 4                    │
+│ a5 (x15)│ X5     │ Argument 5                    │
+│ a6 (x16)│ X6     │ Argument 6                    │
+│ a7 (x17)│ X7     │ Argument 7                    │
+└──────────────────────────────────────────────────┘
+
+Hardware performs this mapping automatically on
+cross-ISA domain transitions.
+</pre></div>
+</div>
+</section>
+<section id="context-size">
+<h2>Context Size<a class="headerlink" href="#context-size" title="Link to this heading"></a></h2>
+<p>Context size varies by ISA:</p>
+<table class="docutils align-default" id="id1">
+<caption><span class="caption-text">Context Sizes</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ISA</p></th>
+<th class="head"><p>Base Size</p></th>
+<th class="head"><p>With Extensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RISC-V RV64</p></td>
+<td><p>264 bytes</p></td>
+<td><p>+256 bytes (FP), + variable (V)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ARM64</p></td>
+<td><p>528 bytes</p></td>
+<td><p>+512 bytes (SVE)</p></td>
+</tr>
+<tr class="row-even"><td><p>x86-64</p></td>
+<td><p>296 bytes</p></td>
+<td><ul class="simple">
+<li><p>variable (AVX-512)</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DCB.ctrlblock_size must accommodate:
+- Context for domain&#39;s ISA
+- ISA-specific extensions
+- Implementation-defined extensions
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="isatag.html" class="btn btn-neutral float-left" title="ISA Tag" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="privilege.html" class="btn btn-neutral float-right" title="Privilege Model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

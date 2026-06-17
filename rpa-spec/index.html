@@ -1,0 +1,501 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPA Architecture Specification &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Overview" href="intro/overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="#" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="memory/translation.html">Address Translation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/ipa.html">IPA Boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory/protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">RPA Architecture Specification</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rpa-architecture-specification">
+<h1>RPA Architecture Specification<a class="headerlink" href="#rpa-architecture-specification" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro/overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro/overview.html#the-challenge">The Challenge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/overview.html#the-rpa-approach">The RPA Approach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/overview.html#target-audience">Target Audience</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro/features.html">Key Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro/features.html#extensible-isolation">Extensible Isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/features.html#isa-independent-privilege-management">ISA-Independent Privilege Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/features.html#native-heterogeneous-isa-support">Native Heterogeneous-ISA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/features.html#security-domain-separation">Security Domain Separation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/features.html#unified-abstraction">Unified Abstraction</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="intro/terminology.html">Terminology</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro/terminology.html#core-concepts">Core Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/terminology.html#address-concepts">Address Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/terminology.html#modes">Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/terminology.html#security-concepts">Security Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/terminology.html#isa-concepts">ISA Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="intro/terminology.html#hierarchy-concepts">Hierarchy Concepts</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/domain_creation.html">Domain Creation Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/domain_creation.html#scenario-overview">Scenario Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/domain_creation.html#step-1-firmware-creates-hypervisor-domain">Step 1: Firmware Creates Hypervisor Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/domain_creation.html#step-2-hypervisor-creates-guest-os-domain">Step 2: Hypervisor Creates Guest OS Domain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/domain_creation.html#step-3-guest-os-creates-user-application">Step 3: Guest OS Creates User Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/domain_creation.html#summary-table">Summary Table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/system_call.html">System Call Example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#scenario">Scenario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#step-1-application-prepares-arguments">Step 1: Application Prepares Arguments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#step-2-application-executes-ascend">Step 2: Application Executes ascend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#hardware-actions">Hardware Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#step-3-guest-os-handles-system-call">Step 3: Guest OS Handles System Call</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#step-4-guest-os-returns-to-application">Step 4: Guest OS Returns to Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#hardware-actions-for-return">Hardware Actions for return</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#complete-timeline">Complete Timeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#overhead-analysis">Overhead Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/system_call.html#hypervisor-interception-optional">Hypervisor Interception (Optional)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/interrupt_handling.html">Interrupt Handling Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/interrupt_handling.html#interrupt-delivery-overview">Interrupt Delivery Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/interrupt_handling.html#example-1-locally-handled-interrupt">Example 1: Locally Handled Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/interrupt_handling.html#example-2-propagated-interrupt">Example 2: Propagated Interrupt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/interrupt_handling.html#comparison">Comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/interrupt_handling.html#interrupt-controller-configuration">Interrupt Controller Configuration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dcb/layout.html">DCB Memory Layout</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dcb/layout.html#three-section-layout">Three-Section Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dcb/layout.html#alignment-requirements">Alignment Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dcb/layout.html#memory-allocation">Memory Allocation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dcb/fields.html">DCB Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dcb/fields.html#rpa-spec-fields">RPA Spec Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dcb/fields.html#field-semantics">Field Semantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dcb/fields.html#access-permissions">Access Permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="primitives/descend.html">descend Primitive</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="primitives/descend.html#instruction-format">Instruction Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/descend.html#pre-conditions">Pre-conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/descend.html#execution-steps">Execution Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/descend.html#error-conditions">Error Conditions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/descend.html#post-conditions">Post-conditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="primitives/ascend.html">ascend Primitive</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="primitives/ascend.html#instruction-format">Instruction Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/ascend.html#execution-steps">Execution Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/ascend.html#trap-propagation">Trap Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/ascend.html#service-types">Service Types</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="primitives/return.html">return Primitive</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="primitives/return.html#instruction-format">Instruction Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/return.html#execution-steps">Execution Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/return.html#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="primitives/return.html#error-conditions">Error Conditions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="exception/trap.html">Trap Mechanism</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exception/trap.html#trap-sources">Trap Sources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception/trap.html#trap-handling">Trap Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exception/propagation.html">Trap Propagation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exception/propagation.html#propagation-chain">Propagation Chain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exception/propagation.html#root-domain-behavior">Root Domain Behavior</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interrupt/controller.html">Interrupt Controller</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/controller.html#interrupt-routing">Interrupt Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/controller.html#interrupt-vector-table">Interrupt Vector Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/controller.html#interrupt-enable-mask">Interrupt Enable Mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/controller.html#domain-isolation">Domain Isolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="interrupt/delivery.html">Interrupt Delivery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/delivery.html#delivery-sequence">Delivery Sequence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/delivery.html#interrupt-propagation">Interrupt Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/delivery.html#example-nested-virtualization">Example: Nested Virtualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/delivery.html#interrupt-priority">Interrupt Priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interrupt/delivery.html#interrupt-latency">Interrupt Latency</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="memory/translation.html">Address Translation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="memory/translation.html#translation-levels">Translation Levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/translation.html#translation-process">Translation Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/translation.html#page-table-structure">Page Table Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/translation.html#translation-lookaside-buffer">Translation Lookaside Buffer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memory/ipa.html">IPA Boundary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="memory/ipa.html#ipa-region-definition">IPA Region Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/ipa.html#boundary-check">Boundary Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/ipa.html#violation-handling">Violation Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/ipa.html#example-application-memory-isolation">Example: Application Memory Isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/ipa.html#nested-virtualization-example">Nested Virtualization Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memory/inherit.html">INHERIT Mode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="memory/inherit.html#concept">Concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/inherit.html#performance-benefit">Performance Benefit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/inherit.html#use-cases">Use Cases</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/inherit.html#security-considerations">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/inherit.html#mode-switching">Mode Switching</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memory/protection.html">Memory Protection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="memory/protection.html#protection-layers">Protection Layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/protection.html#permission-propagation">Permission Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/protection.html#write-xor-execute-w-x">Write-XOR-Execute (W^X)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/protection.html#memory-types">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory/protection.html#protection-example-secure-enclave">Protection Example: Secure Enclave</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hetero/isatag.html">ISA Tag</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hetero/isatag.html#isa-tag-field">ISA Tag Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/isatag.html#isa-switch-on-domain-transition">ISA Switch on Domain Transition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/isatag.html#isa-boundary-rules">ISA Boundary Rules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/isatag.html#binary-translation-integration">Binary Translation Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/isatag.html#implementation-requirements">Implementation Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hetero/context.html">Context Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hetero/context.html#context-structure">Context Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/context.html#context-save-on-domain-transition">Context Save on Domain Transition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/context.html#context-restore">Context Restore</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/context.html#cross-isa-calling-convention">Cross-ISA Calling Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/context.html#context-size">Context Size</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hetero/privilege.html">Privilege Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hetero/privilege.html#traditional-vs-rpa">Traditional vs RPA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/privilege.html#privilege-determination">Privilege Determination</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/privilege.html#privilege-inheritance">Privilege Inheritance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/privilege.html#privilege-escalation">Privilege Escalation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hetero/privilege.html#capability-model">Capability Model</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="security/overview.html">Security Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security/overview.html#security-principles">Security Principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/overview.html#threat-model">Threat Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/overview.html#security-mechanisms">Security Mechanisms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/overview.html#defense-in-depth">Defense in Depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/overview.html#security-configuration">Security Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security/group.html">Security Groups</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security/group.html#concept">Concept</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/group.html#security-group-definition">Security Group Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/group.html#access-control-matrix">Access Control Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/group.html#memory-access-check">Memory Access Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/group.html#example-secure-enclave">Example: Secure Enclave</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/group.html#management-vs-access">Management vs Access</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security/encryption.html">Memory Encryption</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security/encryption.html#encryption-overview">Encryption Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/encryption.html#per-domain-encryption">Per-Domain Encryption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/encryption.html#encryption-modes">Encryption Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/encryption.html#memory-bandwidth-impact">Memory Bandwidth Impact</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/encryption.html#key-management">Key Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/encryption.html#use-case-confidential-computing">Use Case: Confidential Computing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security/attestation.html">Attestation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security/attestation.html#attestation-overview">Attestation Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/attestation.html#attestation-components">Attestation Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/attestation.html#attestation-keys">Attestation Keys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/attestation.html#attestation-protocol">Attestation Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/attestation.html#measurement-chain">Measurement Chain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="security/confidential.html">Confidential Computing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="security/confidential.html#confidential-computing-model">Confidential Computing Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/confidential.html#threat-model">Threat Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/confidential.html#rpa-confidential-computing-architecture">RPA Confidential Computing Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/confidential.html#security-configuration">Security Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/confidential.html#vm-launch-protocol">VM Launch Protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security/confidential.html#use-cases">Use Cases</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="integration/diagram.html">System Diagram</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration/diagram.html#domain-hierarchy">Domain Hierarchy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/diagram.html#address-translation-flow">Address Translation Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/diagram.html#domain-transition">Domain Transition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/diagram.html#security-group-isolation">Security Group Isolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integration/interfaces.html">Hardware-Software Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration/interfaces.html#dcb-memory-layout">DCB Memory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/interfaces.html#instruction-encoding">Instruction Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/interfaces.html#control-registers">Control Registers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/interfaces.html#software-conventions">Software Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/interfaces.html#error-codes">Error Codes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integration/boot.html">Boot Sequence</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration/boot.html#boot-stages">Boot Stages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/boot.html#initial-dcb-configuration">Initial DCB Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/boot.html#domain-creation-during-boot">Domain Creation During Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/boot.html#boot-example-full-system">Boot Example: Full System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/boot.html#secure-boot">Secure Boot</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="appendix/encoding.html">DCB Field Encoding</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/encoding.html#field-offsets">Field Offsets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/encoding.html#field-descriptions">Field Descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/encoding.html#ipa-region-attributes">IPA Region Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/encoding.html#translation-control">Translation Control</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/pseudocode.html">Pseudocode</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/pseudocode.html#reference-implementation">Reference Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/pseudocode.html#descend-primitive">descend Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/pseudocode.html#ascend-primitive">ascend Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/pseudocode.html#return-primitive">return Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/pseudocode.html#ipa-boundary-check">IPA Boundary Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/pseudocode.html#security-group-check">Security Group Check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/custom.html">Custom Extensions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/custom.html#extension-points">Extension Points</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/custom.html#custom-dcb-fields">Custom DCB Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/custom.html#custom-isa-tags">Custom ISA Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/custom.html#custom-trap-types">Custom Trap Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/custom.html#custom-memory-attributes">Custom Memory Attributes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/custom.html#extension-discovery">Extension Discovery</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/references.html#related-architectures">Related Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/references.html#normative-references">Normative References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/references.html#informative-references">Informative References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/references.html#glossary">Glossary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="appendix/legal.html">Legal Notice</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="appendix/legal.html#copyright">Copyright</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/legal.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/legal.html#trademarks">Trademarks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/legal.html#disclaimers">Disclaimers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/legal.html#implementations">Implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="appendix/legal.html#contact">Contact</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro/overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

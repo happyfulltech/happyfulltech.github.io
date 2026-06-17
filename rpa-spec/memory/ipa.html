@@ -1,0 +1,284 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPA Boundary &mdash; RPA Architecture Specification 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=63ee33d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="INHERIT Mode" href="inherit.html" />
+    <link rel="prev" title="Address Translation" href="translation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            RPA Architecture Specification
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+<a class="reference external" href="rpa-spec.pdf" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+  📄 PDF Version
+</a>
+
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Chapter 1: Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/features.html">Key Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/terminology.html">Terminology</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 2: Operation Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/domain_creation.html">Domain Creation Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/system_call.html">System Call Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/interrupt_handling.html">Interrupt Handling Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 3: DCB and Primitives</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/layout.html">DCB Memory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dcb/fields.html">DCB Fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/descend.html">descend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/ascend.html">ascend Primitive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../primitives/return.html">return Primitive</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 4: Exceptions and Interrupts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exception/trap.html">Trap Mechanism</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../exception/propagation.html">Trap Propagation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/controller.html">Interrupt Controller</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../interrupt/delivery.html">Interrupt Delivery</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 5: Memory System</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="translation.html">Address Translation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">IPA Boundary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ipa-region-definition">IPA Region Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#boundary-check">Boundary Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#violation-handling">Violation Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example-application-memory-isolation">Example: Application Memory Isolation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nested-virtualization-example">Nested Virtualization Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inherit.html">INHERIT Mode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="protection.html">Memory Protection</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 6: ISA Interaction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/isatag.html">ISA Tag</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/context.html">Context Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hetero/privilege.html">Privilege Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 7: Security System</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../security/overview.html">Security Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/group.html">Security Groups</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/encryption.html">Memory Encryption</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/attestation.html">Attestation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/confidential.html">Confidential Computing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 8: System Integration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../integration/diagram.html">System Diagram</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/interfaces.html">Hardware-Software Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/boot.html">Boot Sequence</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Chapter 9: Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/encoding.html">DCB Field Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/pseudocode.html">Pseudocode</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/custom.html">Custom Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/legal.html">Legal Notice</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">RPA Architecture Specification</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">IPA Boundary</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/memory/ipa.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ipa-boundary">
+<h1>IPA Boundary<a class="headerlink" href="#ipa-boundary" title="Link to this heading"></a></h1>
+<p>IPA (Intermediate Physical Address) boundaries define the memory regions
+accessible to each domain.</p>
+<section id="ipa-region-definition">
+<h2>IPA Region Definition<a class="headerlink" href="#ipa-region-definition" title="Link to this heading"></a></h2>
+<p>Each DCB contains a list of permitted IPA regions:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>DCB Field: ipa_regions[]
+────────────────────────
+Array of IPA region descriptors
+
+Region Descriptor:
+┌──────────────────────────────────────────────────┐
+│ base_ipa   : Starting IPA (64-bit)               │
+├──────────────────────────────────────────────────┤
+│ limit_ipa  : Ending IPA (64-bit, inclusive)      │
+├──────────────────────────────────────────────────┤
+│ attributes : Access permissions                  │
+│   - Readable (R)                                 │
+│   - Writable (W)                                 │
+│   - Executable (X)                               │
+│   - Device memory (D)                            │
+└──────────────────────────────────────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="boundary-check">
+<h2>Boundary Check<a class="headerlink" href="#boundary-check" title="Link to this heading"></a></h2>
+<p>Hardware checks IPA boundaries on every memory access:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>check_ipa_boundary(ipa, access_type):
+
+for region in current_dcb.ipa_regions:
+    if ipa &gt;= region.base_ipa and ipa &lt;= region.limit_ipa:
+        // Check access permissions
+        if access_type == READ and not region.R:
+            fault(PERMISSION_DENIED)
+        if access_type == WRITE and not region.W:
+            fault(PERMISSION_DENIED)
+        if access_type == EXECUTE and not region.X:
+            fault(PERMISSION_DENIED)
+        return ALLOWED
+
+// IPA not in any permitted region
+fault(IPA_BOUNDARY_VIOLATION)
+</pre></div>
+</div>
+</section>
+<section id="violation-handling">
+<h2>Violation Handling<a class="headerlink" href="#violation-handling" title="Link to this heading"></a></h2>
+<p>IPA boundary violations trigger traps:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>On IPA_BOUNDARY_VIOLATION:
+1. Hardware saves context to current DCB
+2. Trap propagates to parent domain
+3. Parent handler decides:
+   - Map new region (extend access)
+   - Terminate domain (security violation)
+   - Emulate access (device I/O)
+</pre></div>
+</div>
+</section>
+<section id="example-application-memory-isolation">
+<h2>Example: Application Memory Isolation<a class="headerlink" href="#example-application-memory-isolation" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Application DCB:
+┌──────────────────────────────────────────────────┐
+│ ipa_regions[0]:                                  │
+│   base  = 0x00010000                            │
+│   limit = 0x0001FFFF  (64KB code)               │
+│   attr  = R-X                                    │
+├──────────────────────────────────────────────────┤
+│ ipa_regions[1]:                                  │
+│   base  = 0x00020000                            │
+│   limit = 0x0002FFFF  (64KB data)               │
+│   attr  = RW-                                    │
+└──────────────────────────────────────────────────┘
+
+Attempt to access IPA 0x00030000:
+→ IPA_BOUNDARY_VIOLATION
+→ Trap to parent (OS)
+→ OS may extend region or terminate application
+</pre></div>
+</div>
+</section>
+<section id="nested-virtualization-example">
+<h2>Nested Virtualization Example<a class="headerlink" href="#nested-virtualization-example" title="Link to this heading"></a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Guest VM IPA regions (set by hypervisor):
+
+Guest DCB:
+┌──────────────────────────────────────────────────┐
+│ ipa_regions[0]:                                  │
+│   base  = 0x40000000                            │
+│   limit = 0x4FFFFFFF  (256MB guest physical)    │
+│   attr  = RWX                                    │
+└──────────────────────────────────────────────────┘
+
+Hypervisor translates guest IPA to host PA:
+- Guest IPA 0x40000000 → Host PA 0x80000000
+- Guest IPA 0x4FFFFFFF → Host PA 0x8FFFFFFF
+
+Guest cannot access outside its assigned region.
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="translation.html" class="btn btn-neutral float-left" title="Address Translation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="inherit.html" class="btn btn-neutral float-right" title="INHERIT Mode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, RPA Architecture Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
