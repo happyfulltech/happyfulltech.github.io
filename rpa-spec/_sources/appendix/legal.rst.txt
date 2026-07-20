@@ -1,4 +1,4 @@
-.. SPDX-FileCopyrightText: Copyright 2026 RPA Architecture Team
+.. SPDX-FileCopyrightText: Copyright 2026 Shanghai HappyFull Technologies
 .. SPDX-License-Identifier: CC-BY-SA-4.0
 
 Legal Notice
@@ -7,11 +7,11 @@ Legal Notice
 Copyright
 ---------
 
-This specification is copyrighted by the RPA Architecture Team.
+This specification is copyrighted by the Shanghai HappyFull Technologies.
 
 .. code-block:: text
 
-   SPDX-FileCopyrightText: Copyright 2026 RPA Architecture Team
+   SPDX-FileCopyrightText: Copyright 2026 Shanghai HappyFull Technologies
 
 License
 -------
@@ -34,14 +34,14 @@ This specification is licensed under Creative Commons Attribution-ShareAlike 4.0
 Trademarks
 ----------
 
-RPA and related trademarks are the property of the RPA Architecture Team.
+RPA and related trademarks are the property of the Shanghai HappyFull Technologies.
 
 Disclaimers
 -----------
 
 This specification is provided "as is" without warranty of any kind.
 
-The RPA Architecture Team makes no representations about the suitability
+The Shanghai HappyFull Technologies makes no representations about the suitability
 of this specification for any purpose.
 
 Implementations
@@ -50,7 +50,7 @@ Implementations
 Implementations of this specification may be subject to additional
 licensing requirements from patent holders.
 
-The RPA Architecture Team does not guarantee that implementation of
+The Shanghai HappyFull Technologies does not guarantee that implementation of
 this specification does not infringe any patents.
 
 Contact
@@ -60,5 +60,5 @@ For licensing inquiries or contributions:
 
 .. code-block:: text
 
-   RPA Architecture Team
+   Shanghai HappyFull Technologies
    https://github.com/rpa-architecture/rpa-spec
