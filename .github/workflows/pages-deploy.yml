@@ -95,13 +95,16 @@ jobs:
           name: site
           path: _site
 
-      - name: Deploy to ECS via SCP
-        uses: appleboy/scp-action@v0.1.7
+      # happyfullscp is sftp-only (ForceCommand internal-sftp).
+      # Username is hardcoded so GitHub Secrets stay unchanged
+      # (keep existing SSH_KEY = fastile-deploy private key).
+      - name: Deploy to ECS via SFTP
+        uses: SamKirkland/sftp-deploy-action@v1.2.5
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "_site/*"
-          target: "/var/www/blog"
-          overwrite: true
+          server: ${{ secrets.SSH_HOST }}
+          username: happyfullscp
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT || '22' }}
+          local-path: _site/
+          remote-path: /var/www/wwwroot/
+          delete: false
